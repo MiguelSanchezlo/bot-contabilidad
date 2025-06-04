@@ -20,9 +20,22 @@ Este proyecto extrae facturas de la base de datos Ofima en SQL Server, las prepa
    cd bot-contabilidad
 
 2. Crea un entorno virtual e instala dependencias:
+   ```bash
     python -m venv venv
     venv\Scripts\activate
 
     pip install -r requirements.txt
 
-3. Crear un archivo .env raiz con las credenciales:
+4. Crear un archivo .env raiz con las credenciales:
+   ```bash
+   SQLSERVER_USER=
+   SQLSERVER_PASSWORD=
+   SQLSERVER_HOST=
+   SQLSERVER_DB=
+   SQLSERVER_DRIVER=
+   DATAICO_ACCOUNT_ID=
+   DATAICO_AUTH_TOKEN=
+   DATAICO_PREFIX_FM=
+   DATAICO_RESOLUTION_FM=
+   DATAICO_PREFIX_FB=
+   DATAICO_RESOLUTION_FB=
