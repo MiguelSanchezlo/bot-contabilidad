@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style"="black-translucent" />
+  <title>Facturas - Micelu.co</title>
+
+  <!-- Bootstrap CSS + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Tipografía y CSS personalizados -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/invoice.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/facturas.css') }}">
+
+  <!-- Estilos adicionales para hover en filas y overlay -->
+  <style>
+    /* Resaltar fila al pasar el mouse */
+    #tabla-fm tbody tr:hover,
+    #tabla-fb tbody tr:hover,
+    #tabla-dataico tbody tr:hover {
+      background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    /* Configuración básica del overlay de carga */
+    #loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- OVERLAY DE CARGA: arrancará oculto (d-none). -->
+  <div id="loading-overlay" class="d-none justify-content-center align-items-center"
+    style="position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.8); z-index:9999;">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+      <span class="visually-hidden">Cargando…</span>
+    </div>
+    <p id="loading-text" class="mt-2 fw-medium text-dark"></p>
+  </div>
+
+
+  <!-- Contenedor de toasts de Bootstrap -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+    <div id="toast-container"></div>
+  </div>
+
+  <div class="hero_area">
+    <!-- header section -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand d-flex align-items-center" href="/">
+            <span>Micelu.co</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1 text-white"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="mb-0">Listado de Facturas</h4>
+      <div class="d-flex gap-2">
+        <button id="exportar-visible" class="btn btn-success btn-sm" data-bs-toggle="tooltip"
+          title="Descarga en Excel solo las facturas mostradas">
+          <i class="bi bi-download"></i> Exportar a Excel
+        </button>
+        <button id="subir-dataico" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+          title="Enviar facturas seleccionadas a Dataico">
+          <i class="bi bi-cloud-upload"></i> Subir a Dataico
+        </button>
+        <button id="traer-dataico" class="btn btn-info btn-sm" data-bs-toggle="tooltip"
+          title="Obtener datos adicionales desde Dataico">
+          <i class="bi bi-cloud-arrow-down"></i> Traer de Dataico
+        </button>
+        <button id="export-contapyme" class="btn btn-secondary btn-sm" data-bs-toggle="tooltip"
+          title="Exportar a Contapyme en formato Excel">
+          <i class="bi bi-file-earmark-spreadsheet"></i> Exportar a Contapyme
+        </button>
+        <button id="restaurar-tablas" class="btn btn-secondary btn-sm" data-bs-toggle="tooltip"
+          title="Restaurar las tablas al estado original">
+          <i class="bi bi-arrow-counterclockwise"></i> Restaurar todo
+        </button>
+      </div>
+    </div>
+
+    <div class="row g-3 align-items-end mb-3">
+      <div class="col-md-3">
+        <label for="inicio-fm" class="form-label">Último número FM</label>
+        <input type="number" id="inicio-fm" class="form-control" placeholder="Ej. 20474" data-bs-toggle="tooltip"
+          title="Ingresa el último consecutivo FM">
+      </div>
+      <div class="col-md-3">
+        <label for="inicio-fb" class="form-label">Último número FB</label>
+        <input type="number" id="inicio-fb" class="form-control" placeholder="Ej. 13053" data-bs-toggle="tooltip"
+          title="Ingresa el último consecutivo FB">
+      </div>
+      <div class="col-md-3">
+        <button id="asignar-numeracion" class="btn btn-warning" data-bs-toggle="tooltip"
+          title="Asigna consecutivos a las facturas FM/FB mostradas">
+          Asignar numeración
+        </button>
+      </div>
+    </div>
+
+    <!-- Buscador en tiempo real -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <input type="text" id="buscador" class="form-control" placeholder="Buscar en tablas..." data-bs-toggle="tooltip"
+          title="Filtrar facturas en tiempo real">
+      </div>
+    </div>
+
+    <form id="form-filtrar" method="get" class="row g-3 mb-4">
+      <div class="col-md-4">
+        <label for="inicio" class="form-label">Desde:</label>
+        <input type="date" name="inicio" id="inicio" class="form-control" value="{{ fecha_inicio }}"
+          data-bs-toggle="tooltip" title="Fecha de inicio del filtro">
+      </div>
+      <div class="col-md-4">
+        <label for="fin" class="form-label">Hasta:</label>
+        <input type="date" name="fin" id="fin" class="form-control" value="{{ fecha_fin }}" data-bs-toggle="tooltip"
+          title="Fecha de fin del filtro">
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip"
+          title="Filtrar facturas por rango de fechas">
+          Filtrar por fecha
+        </button>
+      </div>
+    </form>
+
+    <div class="row mb-4">
+      <div class="col-12">
+        <h5>Facturas FM</h5>
+        {% if productos_fm %}
+        <div class="facturas-table-wrapper">
+          <div class="table-container">
+            <table class="table table-bordered table-sm table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th>Acción</th>
+                  {% for key in productos_fm[0].keys() %}
+                  <th>{{ key }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody id="tabla-fm">
+                {% for factura in productos_fm %}
+                <tr>
+                  <td>
+                    <button class="btn btn-sm btn-danger eliminar-btn" data-bs-toggle="tooltip"
+                      title="Eliminar esta fila">
+                      Eliminar
+                    </button>
+                  </td>
+                  {% for value in factura.values() %}
+                  <td>{{ value }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <!-- Copia de respaldo para restaurar -->
+            <template id="tabla-fm-backup">
+              <tbody id="tabla-fm">
+                {% for factura in productos_fm %}
+                <tr>
+                  <td>
+                    <button class="btn btn-sm btn-danger eliminar-btn" data-bs-toggle="tooltip"
+                      title="Eliminar esta fila">
+                      Eliminar
+                    </button>
+                  </td>
+                  {% for value in factura.values() %}
+                  <td>{{ value }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </template>
+          </div>
+        </div>
+        {% else %}
+        <p>No hay facturas FM disponibles.</p>
+        {% endif %}
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-12">
+        <h5>Facturas FB</h5>
+        {% if productos_fb %}
+        <div class="facturas-table-wrapper">
+          <div class="table-container">
+            <table class="table table-bordered table-sm table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th>Acción</th>
+                  {% for key in productos_fb[0].keys() %}
+                  <th>{{ key }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody id="tabla-fb">
+                {% for factura in productos_fb %}
+                <tr>
+                  <td>
+                    <button class="btn btn-sm btn-danger eliminar-btn" data-bs-toggle="tooltip"
+                      title="Eliminar esta fila">
+                      Eliminar
+                    </button>
+                  </td>
+                  {% for value in factura.values() %}
+                  <td>{{ value }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <!-- Copia de respaldo para restaurar -->
+            <template id="tabla-fb-backup">
+              <tbody id="tabla-fb">
+                {% for factura in productos_fb %}
+                <tr>
+                  <td>
+                    <button class="btn btn-sm btn-danger eliminar-btn" data-bs-toggle="tooltip"
+                      title="Eliminar esta fila">
+                      Eliminar
+                    </button>
+                  </td>
+                  {% for value in factura.values() %}
+                  <td>{{ value }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </template>
+          </div>
+        </div>
+        {% else %}
+        <p>No hay facturas FB disponibles.</p>
+        {% endif %}
+      </div>
+    </div>
+    <br>
+
+    <div class="facturas-table-wrapper">
+      <div class="table-container">
+        <div id="section-dataico" style="display:none">
+          <h5>Facturas desde Dataico - FM y FB</h5>
+          <table id="tabla-dataico" class="table table-bordered table-sm table-hover">
+            <thead>
+              <tr>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap JS + XLSX + facturas.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="{{ url_for('static', filename='js/facturas.js') }}"></script>
+</body>
+
+</html>

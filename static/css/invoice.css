@@ -1,0 +1,1895 @@
+/* Variables para consistencia en colores y tamaños */
+:root {
+  --primary-color: #003366;
+  --secondary-color: #0066cc;
+  --accent-color: #f0f7ff;
+  --border-color: #336699;
+  --error-color: #d32f2f;
+  --success-color: #388e3c;
+  --text-color: #333;
+  --light-text: #666;
+  --navbar-bg: #000000;
+  --navbar-text: #ffffff;
+  --button-bg: #000000;
+  --button-hover: #1a1a1a;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --touch-target-size: 52px; /* Tamaño aún más grande para objetivos táctiles */
+  --spacing: 14px;
+}
+
+/* Aplicar estilos solo al contenido de la factura, no al navbar */
+.container-fluid:not(.header_section .container-fluid) {
+  padding: var(--spacing);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Bloques de información con mejor separación y sombras */
+.info-block {
+  background-color: var(--white);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  box-shadow: var(--box-shadow);
+  border-left: 4px solid var(--primary-color);
+  border-left-width: 4px;
+}
+
+.info-block h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+/* Formularios y controles - Optimizados para táctil */
+.info-block .form-control, 
+.info-block .form-select, 
+.info-block .btn,
+.modal-content .form-control,
+.modal-content .form-select,
+.modal-content .btn,
+.floating-actions .btn,
+.table-responsive .form-control {
+  height: auto;
+  padding: 0.4rem 0.75rem;
+  font-size: 1.05rem;
+  border-radius: var(--border-radius);
+  border: 2px solid #dee2e6;
+  min-height: 38px;
+}
+
+.info-block .form-control:focus, 
+.info-block .form-select:focus,
+.modal-content .form-control:focus,
+.modal-content .form-select:focus,
+.table-responsive .form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  border-color: var(--primary-color);
+}
+
+.info-block .form-label,
+.modal-content .form-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* Botones grandes y táctiles - excluir los del navbar */
+.info-block .btn,
+.modal-content .btn,
+.floating-actions .btn,
+.table-responsive .btn {
+  min-height: var(--touch-target-size);
+  min-width: var(--touch-target-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.info-block .btn:active,
+.modal-content .btn:active,
+.floating-actions .btn:active,
+.table-responsive .btn:active {
+  transform: scale(0.96); /* Efecto de presión mejorado */
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.1);
+}
+
+/* Botón principal*/
+.btnCl {
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 18px 28px;  /* Increased padding */
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 19px;     /* Slightly larger font */
+  transition: all 0.3s;
+  font-family: 'Poppins', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;    /* Slightly wider */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btnCl:hover {
+  background-color: var(--button-hover);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.btnCl i {
+  margin-right: 12px;  /* Slightly more spacing */
+  font-size: 20px;     /* Larger icon */
+}
+
+/* Mantener botones de Bootstrap con sus colores */
+.info-block .btn-primary,
+.modal-content .btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.info-block .btn-secondary,
+.modal-content .btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.info-block .btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.info-block .btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Iconos más grandes y visibles */ 
+.info-block .form-label .bi,
+.modal-content .form-label .bi{
+  font-size: 1.4rem;
+  margin: 10px;
+  color: inherit;
+}
+/* Estilos específicos para el botón de eliminar en la tabla de productos */
+.table-responsive .remover-producto .bi {
+  font-size: 1.2rem;
+  margin: 0;  /* Eliminar el margen de 10px */
+}
+
+/* Ajustar el padding del botón */
+.remover-producto {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Mejoras para la tabla */
+.table-responsive {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+  margin-bottom: 0;
+  background-color: white;
+  box-shadow: none;
+}
+
+.table {
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table thead th {
+  background-color: #e9ecef;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 16px 12px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 2px solid #dee2e6;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+.table tbody td {
+  padding: 0.6rem 0.75rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Inputs dentro de tablas optimizados para táctil */
+.table-input {
+  width: 100%;
+  min-height: 34px !important;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem !important;
+  height: auto !important;
+}
+
+.table-input:focus {
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+  border-color: var(--primary-color);
+}
+
+/* Filas de tabla con estilo mejorado */
+.table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.03);
+}
+
+/* Estilos para modales - mejorados para táctil */
+.modal-content {
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header-custom {
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+  border-radius: 18px 18px 0 0;
+  padding: 20px 24px;
+}
+
+.modal-title {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.modal-title .bi {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.modal-body {
+  padding: 28px;
+}
+
+.modal-footer {
+  padding: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el modal de edición de cliente */
+#editarClienteModal .modal-body {
+  padding: 24px;
+}
+
+#editarClienteModal .form-control,
+#editarClienteModal .form-select {
+  padding: 10px 12px;
+  height: 46px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+#editarClienteModal .form-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+#editarClienteModal .form-label .bi {
+  font-size: 1.1rem;
+}
+
+.client-info-summary {
+  background-color: var(--accent-color);
+  border-radius: 12px;
+  padding: 16px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.client-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+}
+
+.client-avatar .bi {
+  font-size: 24px;
+  color: white;
+}
+
+/* Responsive para tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+  #editarClienteModal .modal-dialog {
+    max-width: 720px;
+    margin: 1.75rem auto;
+  }
+  
+  #editarClienteModal .form-control,
+  #editarClienteModal .form-select {
+    height: 50px;
+    font-size: 16px;
+  }
+  
+  .client-avatar {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .client-avatar .bi {
+    font-size: 28px;
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 767px) {
+  #editarClienteModal .modal-body {
+    padding: 18px;
+  }
+  
+  #editarClienteModal .form-control,
+  #editarClienteModal .form-select {
+    height: 44px;
+    font-size: 15px;
+  }
+}
+
+/* Lista de grupos para selección mejorada */
+.list-group-item {
+  padding: 18px;
+  border-left: 0;
+  border-right: 0;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.list-group-item:active {
+  background-color: rgba(13, 110, 253, 0.15);
+  transform: scale(0.99);
+}
+
+.list-group-item:first-child {
+  border-top: 0;
+}
+
+.list-group-item:last-child {
+  border-bottom: 0;
+}
+
+.list-group-item.active, .list-group-item.selected {
+  background-color: rgba(13, 110, 253, 0.15);
+  color: inherit;
+  border-color: rgba(0, 0, 0, 0.125);
+  font-weight: 500;
+}
+
+/* Campos de búsqueda optimizados */
+.search-container {
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  box-shadow: none;
+}
+
+.input-group .form-control,
+.input-group .btn {
+  height: auto;
+  min-height: 38px;
+  font-size: 1.05rem;
+  padding: 0.4rem 0.75rem;
+}
+
+/* Fix for NIT/Cédula input and button */
+
+/* Reset border styles for #nit - the conflicting styles are causing issues */
+#nit {
+  border: 2px solid #dee2e6;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 40px; /* Increased to match other form fields */
+  min-height: 40px; /* Increased to match other form fields */
+  max-height: 40px; /* Increased to match other form fields */
+  font-size: 1.05rem;
+  padding: 0.4rem 0.75rem;
+}
+
+/* Fix the search button to match exact height and make it more visible */
+#buscar-nit-btn {
+  height: 40px; /* Increased to match other form fields */
+  min-height: 40px; /* Increased to match other form fields */
+  max-height: 40px; /* Increased to match other form fields */
+  border: 2px solid #dee2e6;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color); /* Changed to primary color */
+  transition: background-color 0.2s ease;
+}
+
+/* Fix icon visibility in the search button */
+#buscar-nit-btn .bi {
+  font-size: 1rem;
+  margin: 0;
+  color: white; /* Changed to white for better visibility */
+}
+
+/* Add hover effect */
+#buscar-nit-btn:hover {
+  background-color: #004b8f; /* Slightly darker shade for hover */
+  cursor: pointer;
+}
+
+/* Ensure input group has consistent height */
+.col-lg-3 .input-group,
+.col-md-6 .input-group {
+  display: flex;
+  align-items: center;
+  height: 40px; /* Increased to match other form fields */
+}
+
+/* Override any conflicting touch-target rules for this specific button */
+.info-block #buscar-nit-btn {
+  min-height: 40px; /* Increased to match other form fields */
+  min-width: 40px; /* Increased to match other form fields */
+  padding: 0 0.75rem;
+}
+
+/* Ensure the input group doesn't get extra styles from .search-container */
+.col-lg-3 .input-group,
+.col-md-6 .input-group {
+  box-shadow: none;
+  border-radius: var(--border-radius);
+  overflow: visible;
+}
+
+#buscar-nit-btn {
+  min-height: 38px;
+  width: auto;
+  font-size: 1rem;
+  padding: 0.4rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#nit {
+  border-right: none;
+  border: 2px solid #dee2e6;
+  height: 100%;
+}
+
+.col-lg-3 .input-group,
+.col-md-6 .input-group {
+  display: flex;
+  align-items: stretch;
+}
+
+.search-container .input-group {
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.search-container .input-group .form-control {
+  border: 2px solid #e9ecef;
+  border-right: none;
+  padding-left: 20px;
+  font-size: 1.1rem;
+  height: 60px;
+}
+
+.search-container .input-group .btn {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  width: 70px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Botones flotantes para acciones principales */
+.floating-actions {
+  position: static;
+  z-index: auto;
+  padding: 18px 0;
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-top: 1.5rem;
+}
+
+/* Navbar estilos consistentes con otras páginas */
+.header_section {
+  background-color: var(--navbar-bg);
+  font-family: "Poppins", sans-serif;
+  padding: 10px 0;
+}
+
+.navbar-brand span {
+  font-weight: bold;
+  font-size: 24px;
+  color: var(--navbar-text);
+}
+
+.nav-link {
+  color: var(--navbar-text) !important;
+  font-size: 18px;
+  padding: 12px 16px !important;
+}
+
+.nav-item.active .nav-link {
+  position: relative;
+}
+
+.nav-item.active .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background-color: #ff4f5a;
+  border-radius: 3px;
+}
+
+/* Mensajes de error/éxito mejorados */
+.error-message {
+  padding: 10px 14px;
+  margin-top: 10px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+}
+
+.text-danger {
+  color: var(--error-color);
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.text-success {
+  color: var(--success-color);
+  background-color: rgba(25, 135, 84, 0.1);
+}
+
+/* Responsive adaptaciones */
+@media (max-width: 1200px) {
+  .container-fluid:not(.header_section .container-fluid) {
+    padding: 15px;
+  }
+
+  .info-block {
+    padding: 20px;
+  }
+
+  .modal-dialog {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 991px) {
+  .floating-actions {
+    padding: 15px 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  
+  .floating-actions .btnCl {
+    min-width: 200px;
+  }
+
+  .info-block .form-control, 
+  .info-block .form-select, 
+  .info-block .btn,
+  .modal-content .form-control,
+  .modal-content .form-select,
+  .modal-content .btn,
+  .table-responsive .form-control,
+  .table-responsive .btn {
+    height: 48px;
+    padding: 10px 15px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table th, .table td {
+    white-space: nowrap;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .floating-actions {
+    padding: 12px 0;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .floating-actions .btnCl {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .container-fluid:not(.header_section .container-fluid) {
+    padding: 10px;
+  }
+
+  .info-block {
+    padding: 16px;
+    margin-bottom: 15px;
+  }
+
+  .info-block h5 {
+    font-size: 1.1rem;
+  }
+
+  .form-label {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+}
+
+/* Ajustes específicos para tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+  .form-control, .form-select, .btn {
+    padding: 15px;
+    font-size: 16px;
+    height: auto;
+  }
+  
+  .btnCl {
+    width: 280px;
+    font-size: 19px;
+  }
+  
+  .info-block h5 {
+    font-size: 18px;
+  }
+}
+
+.form-control[readonly] {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border-color: #dee2e6;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Estilo especial para campos antes de cargar datos */
+.form-control.empty-readonly {
+  background-color: #f0f0f0;
+  border-color: #ced4da;
+  color: #adb5bd;
+  font-style: italic;
+}
+
+/* Añadir al final del archivo */
+
+/* Estilos específicos para el botón agregar producto */
+#traer-facturas a {
+  color: wheat;
+  background-color: #007bff;
+  border-color: #007bff;
+  cursor: pointer;
+}
+
+#traer-facturas a :hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+/* Asegurar que los botones dentro del formulario no envíen el formulario a menos que sean type="submit" */
+form button:not([type="submit"]) {
+  cursor: pointer;
+}
+
+/* Estilos para notificaciones Toast */
+.toast-container {
+  z-index: 1090;
+  max-width: 400px;
+}
+
+.toast {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+}
+
+.toast.showing {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-header {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 15px 20px;
+}
+
+.toast-body {
+  padding: 15px 20px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.toast-body i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.toast.success {
+  background-color: rgba(40, 167, 69, 0.9);
+}
+
+.toast.error {
+  background-color: rgba(220, 53, 69, 0.9);
+}
+
+.toast.warning {
+  background-color: rgba(255, 193, 7, 0.9);
+}
+
+.toast.info {
+  background-color: rgba(23, 162, 184, 0.9);
+}
+
+/* Responsive para iPad y tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .toast-container {
+    max-width: 350px;
+  }
+  
+  .toast-body {
+    padding: 18px 20px;
+    font-size: 1.1rem;
+  }
+  
+  .toast-body i {
+    font-size: 1.7rem;
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 767px) {
+  .toast-container {
+    max-width: 300px;
+    padding: 10px;
+  }
+  
+  .toast {
+    margin-bottom: 10px;
+  }
+  
+  .toast-body {
+    padding: 12px 15px;
+  }
+}
+
+/* Estilos para filtros de categoría - Versión simplificada y elegante */
+.category-filter {
+  margin-bottom: 1.25rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+/* Diseño de dos columnas más compacto */
+.category-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.category-tabs .btn-check + .btn {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  background-color: white;
+}
+
+.category-tabs .btn-check + .btn i {
+  font-size: 1.25rem;
+  margin-right: 8px;
+  transition: all 0.2s ease;
+}
+
+.category-tabs .btn-check:checked + .btn {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.category-tabs .btn-check + .btn:hover {
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+}
+
+/* Eliminar bordes laterales de colores */
+.category-tabs .btn-check + .btn#cat-cel-label,
+.category-tabs .btn-check + .btn#cat-acce-label {
+  border-left-width: 1px;
+  border-left-color: #dee2e6;
+}
+
+/* Eliminar colores específicos para cada categoría y usar el mismo */
+.category-tabs .btn-check:checked + .btn#cat-cel-label,
+.category-tabs .btn-check:checked + .btn#cat-acce-label {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Mejoras para mostrar la selección activa */
+.category-tabs .btn-check + .btn .icon-check {
+  display: none; /* Ocultar el icono de verificación */
+}
+
+/* Optimizaciones para iPad */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .category-tabs .btn-check + .btn {
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  .category-tabs .btn-check + .btn i {
+    font-size: 1.3rem;
+    margin-right: 10px;
+  }
+}
+
+/* Optimizaciones para dispositivos móviles */
+@media (max-width: 767px) {
+  .category-filter {
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  
+  .category-tabs {
+    gap: 8px;
+  }
+  
+  .category-tabs .btn-check + .btn {
+    padding: 8px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+  
+  .category-tabs .btn-check + .btn i {
+    font-size: 1.2rem;
+    margin-right: 6px;
+  }
+}
+
+/* Ocultar la columna de IMEIs para accesorios */
+.imeis-column.d-none,
+.imeis-btn.d-none {
+  display: none !important;
+}
+
+/* Estado de carga */
+#search-loading {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mejoras en la visualización de resultados */
+.table tbody tr.table-success {
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.table tbody tr.table-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.table tbody tr.table-danger {
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+/* Mejoras para iPad */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .category-tabs .btn {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+  }
+  
+  .category-tabs .btn i {
+    font-size: 1.4rem;
+    margin-right: 10px;
+  }
+}
+
+/* Ajuste para móviles */
+@media (max-width: 767px) {
+  .category-tabs .btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .category-tabs .btn i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+  }
+}
+
+/* Waiting Product Styling */
+.no-results-container {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.no-results-icon {
+  font-size: 3rem;
+  opacity: 0.4;
+}
+
+.waiting-product-row {
+  background-color: rgba(255, 193, 7, 0.1) !important;
+  border-left: 3px solid #ffc107;
+}
+
+.waiting-product-row:hover {
+  background-color: rgba(255, 193, 7, 0.15) !important;
+}
+
+.waiting-product {
+  color: #856404;
+  font-style: italic;
+}
+
+.create-waiting-product-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-waiting-product-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#waitingProductModal .modal-body {
+  padding: 1.5rem;
+}
+
+#waitingProductModal .alert {
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+#waitingProductModal .form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+#waitingProductModal .input-group-text {
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+}
+
+/* Responsive adjustments for waiting product feature */
+@media (max-width: 767px) {
+  .no-results-icon {
+    font-size: 2.5rem;
+  }
+  
+  .create-waiting-product-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+  
+  #waitingProductModal .modal-body {
+    padding: 1rem;
+  }
+}
+
+/* Special styling for the waiting product input */
+.form-control.waiting-product {
+  background-color: #fff8e1;
+  border-color: #ffeeba;
+  font-weight: 500;
+}
+
+/* Add badge to show 'Waiting' status */
+.waiting-product-row .producto-search {
+  position: relative;
+}
+
+.waiting-product-row .producto-search::after {
+  content: '[ESPERA]';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ffc107;
+  color: #212529;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* Mobile optimization for invoice table with waiting products */
+@media (max-width: 576px) {
+  .waiting-product-row .producto-search::after {
+    top: -5px;
+    right: -5px;
+    font-size: 0.65rem;
+    padding: 0.1rem 0.35rem;
+  }
+}
+
+/* Create Waiting Product button styling */
+.create-waiting-product-wrapper {
+  padding: 1rem;
+  background-color: #fff8e1;
+  border: 1px dashed #ffc107;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.create-waiting-product-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: #ffc107;
+  color: #212529;
+  border-color: #ffc107;
+  font-weight: 600;
+}
+
+.create-waiting-product-btn:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.create-waiting-product-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.no-results-message {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.no-results-icon {
+  font-size: 3rem;
+  opacity: 0.4;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .create-waiting-product-wrapper {
+    padding: 0.75rem;
+  }
+  
+  .create-waiting-product-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Estilos para el resumen de la factura */
+.invoice-total-summary,
+.invoice-summary-content,
+.mini-invoice-summary,
+.compact-summary {
+  display: none;
+}
+
+/* Nuevo resumen de factura profesional */
+.professional-invoice-summary {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 1rem;
+}
+
+.summary-table {
+  width: 350px;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin-left: auto;
+}
+
+.summary-row {
+  border-bottom: 1px solid #eee;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  padding: 7px 15px;
+  text-align: left;
+  font-size: 0.88rem;
+  color: #555;
+  width: 50%;
+}
+
+.summary-value {
+  padding: 7px 15px;
+  text-align: right;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #333;
+  width: 50%;
+}
+
+/* Fila de total */
+.summary-row.total {
+  background-color: #f8f9fa;
+  font-weight: 700;
+  border-top: 1px solid #dee2e6;
+}
+
+.summary-row.total .summary-label {
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+
+.summary-row.total .summary-value {
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+
+/* Animación para actualizaciones */
+.summary-value.updating {
+  animation: highlight-bg 0.5s ease;
+}
+
+@keyframes highlight-bg {
+  0% { background-color: transparent; }
+  50% { background-color: rgba(0, 51, 102, 0.1); }
+  100% { background-color: transparent; }
+}
+
+/* Responsividad */
+@media (max-width: 767px) {
+  .professional-invoice-summary {
+    margin-top: 1.2rem;
+  }
+  
+  .summary-table {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .summary-label,
+  .summary-value {
+    padding: 12px 15px;
+  }
+  
+  .summary-row.total .summary-label,
+  .summary-row.total .summary-value {
+    font-size: 1.1rem;
+    padding: 14px 15px;
+  }
+}
+
+/* Ajustes para tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+  .summary-table {
+    width: 320px;
+  }
+}
+
+/* Mejora visual para la última fila de la tabla principal */
+.table-responsive table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Espaciado entre tabla y resumen */
+.table-responsive {
+  margin-bottom: 0;
+}
+
+/* Estilo específico para el selector de ruta */
+#editar-ruta {
+  background-color: #f9f9f9;
+  border: 2px solid #dee2e6;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#editar-ruta:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: #fff;
+}
+
+/* Estilo para el ícono de la ruta */
+.form-label .bi-signpost-split {
+  color: #6c757d;
+}
+
+/* Estilo para el input de subtotal */
+.total-input {
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: rgba(0, 51, 102, 0.04);
+  border-color: rgba(0, 51, 102, 0.2);
+}
+
+/* Estilos para el selector de ciudad */
+.city-search-container {
+  position: relative;
+  width: 100%;
+}
+
+.city-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1050;
+  display: none;
+}
+
+.city-results.show {
+  display: block;
+}
+
+.city-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.city-item:last-child {
+  border-bottom: none;
+}
+
+.city-item:hover, .city-item.active {
+  background-color: #f8f9fa;
+}
+
+.selected-city {
+  display: none;
+  background-color: var(--accent-color);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-weight: 500;
+  border-left: 3px solid var(--primary-color);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selected-city.show {
+  display: flex;
+}
+
+.selected-city i {
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+.selected-city i:hover {
+  transform: scale(1.2);
+  color: #dc3545;
+}
+
+/* Optimización para tablets y móviles */
+@media (max-width: 991px) {
+  .city-item {
+    padding: 12px 15px;
+  }
+  
+  .city-results {
+    max-height: 200px;
+  }
+  
+  .selected-city {
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .selected-city {
+    padding: 10px;
+  }
+  
+  .city-item {
+    padding: 12px;
+  }
+}
+
+/* Añadir al final del archivo */
+
+/* Estilo específico para input de descuento */
+.descuento-input {
+  text-align: right;
+  padding-right: 20px !important;
+  position: relative;
+}
+
+.descuento-input::after {
+  content: '%';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+/* Agregar estos estilos al archivo invoice.css */
+/* filepath: c:\Users\mao\proceso-venta\static\css\invoice.css */
+
+.city-search-container {
+  position: relative;
+}
+
+.city-results {
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  z-index: 1050;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.city-results.show {
+  display: block;
+}
+
+.city-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.city-item:hover, .city-item.active {
+  background-color: #f8f9fa;
+}
+
+.selected-city {
+  display: none;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  font-weight: 500;
+}
+
+.selected-city.show {
+  display: flex;
+  align-items: center;
+}
+
+.selected-city .clear-city {
+  cursor: pointer;
+  margin-right: 8px;
+  color: #dc3545;
+}
+
+.selected-city .clear-city:hover {
+  color: #c82333;
+}
+
+/* Estilos para el autocompletado de productos */
+.autocomplete-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1060;
+}
+
+.autocomplete-results.show {
+  display: block;
+}
+
+.autocomplete-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover, .autocomplete-item.active {
+  background-color: #f8f9fa;
+}
+
+.autocomplete-item .product-code {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.autocomplete-item .product-description {
+  font-size: 0.9rem;
+}
+
+/* Ajustar para móviles */
+@media (max-width: 767px) {
+  .autocomplete-results {
+    max-height: 200px;
+  }
+  
+  .autocomplete-item {
+    padding: 8px 12px;
+  }
+}
+
+/* Estilos específicos para autocompletado en modal de productos en espera */
+.product-autocomplete-container,
+.product-code-container {
+  position: relative;
+}
+
+.autocomplete-results {
+  z-index: 1060;
+  width: 100%;
+  max-height: 200px;
+}
+
+.autocomplete-item {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+/* Asegurar que los resultados aparezcan sobre otros elementos */
+.autocomplete-results.show {
+  display: block;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+}
+
+/* Mejorar visibilidad de resultados */
+#product-name-autocomplete.show,
+#product-code-autocomplete.show {
+  display: block !important;
+}
+
+/* Estilos específicos para el modal de productos en espera */
+#waitingProductModal .category-tabs {
+  margin-bottom: 0;
+}
+
+#waitingProductModal .category-tabs .btn-check + .btn {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+#waitingProductModal .category-tabs .btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Estilo para campo de código de solo lectura */
+#waiting-product-code[readonly] {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Estilos para el modal compacto de productos en espera */
+.compact-modal-body {
+  padding: 1.25rem;
+}
+
+.compact-modal-body .alert {
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.category-filter-compact {
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.compact-category-btn {
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.9rem !important;
+  height: auto !important;
+  min-height: 42px !important;
+}
+
+.compact-category-btn i {
+  font-size: 1rem !important;
+  margin-right: 6px !important;
+}
+
+.compact-modal-body .form-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.compact-modal-body .form-control,
+.compact-modal-body .form-select {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.95rem;
+  min-height: 38px;
+}
+
+.compact-modal-body .form-control-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  min-height: 34px;
+}
+
+#waitingProductModal .alert i {
+  font-size: 1.2rem;
+}
+
+#waitingProductModal .modal-footer {
+  padding: 0.75rem 1.25rem;
+}
+
+/* Responsive para tablets y móviles */
+@media (max-width: 767px) {
+  .compact-modal-body {
+    padding: 1rem;
+  }
+  
+  .compact-modal-body .row {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+  
+  .compact-modal-body [class*="col-"] {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .compact-category-btn {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.85rem !important;
+    min-height: 38px !important;
+  }
+  
+  .compact-category-btn i {
+    font-size: 0.95rem !important;
+    margin-right: 4px !important;
+  }
+  
+  /* En móviles muy pequeños, ocultar el texto y mostrar solo iconos */
+  @media (max-width: 375px) {
+    .compact-category-btn span {
+      display: none;
+    }
+    
+    .compact-category-btn i {
+      margin-right: 0 !important;
+    }
+  }
+  
+  #waitingProductModal .modal-footer button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Estilos optimizados para el modal de productos en espera - Agregar al final del archivo */
+
+/* Modal de producto en espera - versión optimizada */
+#waitingProductModal .modal-body {
+  padding: 1rem;
+}
+
+#waitingProductModal .alert {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+#waitingProductModal .alert i {
+  font-size: 1.1rem;
+}
+
+#waitingProductModal .form-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+#waitingProductModal .form-label i {
+  font-size: 1rem;
+  margin-right: 0.25rem;
+}
+
+/* Categorías más compactas */
+.category-filter-compact {
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.compact-category-btn {
+  padding: 0.4rem 0.6rem !important;
+  font-size: 0.9rem !important;
+  min-height: 38px !important;
+}
+
+.compact-category-btn i {
+  font-size: 1rem !important;
+  margin-right: 5px !important;
+}
+
+/* Inputs más compactos pero legibles */
+#waitingProductModal .form-control,
+#waitingProductModal .form-select {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.95rem;
+  min-height: 38px;
+}
+
+#waitingProductModal small.form-text {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Botones del footer */
+#waitingProductModal .modal-footer {
+  padding: 0.75rem 1rem;
+  gap: 0.5rem;
+}
+
+#waitingProductModal .modal-footer .btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+}
+
+/* Responsividad mejorada */
+@media (max-width: 767px) {
+  #waitingProductModal .modal-body {
+    padding: 0.75rem;
+  }
+  
+  #waitingProductModal .row {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+  
+  #waitingProductModal .col-12,
+  #waitingProductModal .col-md-8,
+  #waitingProductModal .col-md-4 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .compact-category-btn {
+    padding: 0.35rem 0.5rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* En móviles muy pequeños, ajustar más */
+@media (max-width: 375px) {
+  .compact-category-btn span {
+    display: none; /* Ocultar texto y mostrar solo iconos */
+  }
+  
+  .compact-category-btn i {
+    margin-right: 0 !important;
+    font-size: 1.2rem !important;
+  }
+  
+  #waitingProductModal .alert {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  
+  #waitingProductModal .modal-footer .btn {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.9rem;
+  }
+}
+/* Estilos para el toast de logout */
+.logout-toast-container {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.logout-toast {
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: auto !important;
+  max-width: 400px !important;
+  pointer-events: auto;
+}
+
+.logout-toast .toast-header {
+  background-color: #003366;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 12px 15px;
+  border-bottom: none;
+}
+
+.logout-toast .toast-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+  opacity: 0.8;
+}
+
+.logout-toast .toast-header .btn-close:hover {
+  opacity: 1;
+}
+
+.logout-toast .toast-body {
+  padding: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+
+.logout-toast .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.logout-confirm-btn {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.logout-confirm-btn:hover {
+  background-color: #333333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustes responsivos para el toast */
+@media (max-width: 767px) {
+  .logout-toast {
+    max-width: 90% !important;
+  }
+  
+  .logout-toast .toast-body {
+    font-size: 15px;
+    padding: 12px;
+  }
+  
+  .logout-toast .btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.user-name {
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.created-by-info {
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border-left: 4px solid #007bff;
+}

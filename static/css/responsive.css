@@ -1,0 +1,269 @@
+/* Layout padding classes */
+.layout_padding {
+  padding: 75px 0;
+}
+
+.layout_padding2 {
+  padding: 45px 0;
+}
+
+.layout_padding2-top {
+  padding-top: 45px;
+}
+
+.layout_padding2-bottom {
+  padding-bottom: 45px;
+}
+
+.layout_padding-top {
+  padding-top: 75px;
+}
+
+.layout_padding-bottom {
+  padding-bottom: 75px;
+}
+
+/* Header section */
+.header_section {
+  background-color: #000000;
+  font-family: "Poppins", sans-serif;
+  padding: 10px 0;
+}
+
+.header_section .container-fluid {
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+.header_section .nav_container {
+  margin: 0 auto;
+}
+
+/* Navbar styles */
+.custom_nav-container .navbar-nav .nav-item .nav-link {
+  padding: 12px 25px;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.custom_nav-container .navbar-nav .nav-item .nav-link::before {
+  content: "";
+  display: none;
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  width: 17px;
+  height: 4px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: #ff4f5a;
+  border-radius: 5px;
+}
+
+.custom_nav-container .navbar-nav .nav-item .nav-link:hover::before {
+  display: block;
+}
+
+.custom_nav-container .navbar-nav .nav-item.active a::before {
+  display: block;
+}
+
+/* Links */
+a, a:hover, a:focus {
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: initial;
+}
+
+/* Buttons */
+.btn, .btn:focus {
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+/* Navbar brand */
+.navbar-brand {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar-brand img {
+  width: 45px;
+  margin-right: 5px;
+}
+
+.navbar-brand span {
+  font-weight: bold;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+/* Custom navbar container */
+.custom_nav-container {
+  z-index: 99999;
+  padding: 5px 0;
+}
+
+.custom_nav-container .navbar-toggler {
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 6px 10px;
+}
+
+.custom_nav-container .navbar-toggler .navbar-toggler-icon {
+  background-image: url(../images/menu.png);
+  background-size: 42px;
+}
+
+/* Footer section */
+.footer_section {
+  background-color: #ffffff;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.footer_section p {
+  color: #171717;
+  margin: 0;
+  text-align: center;
+}
+
+.footer_section a {
+  color: #171717;
+}
+
+/* Media queries para hacer el navbar responsivo */
+
+/* Para tablets y dispositivos medianos */
+@media (max-width: 991px) {
+  .header_section .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  .custom_nav-container .navbar-nav .nav-item .nav-link {
+    padding: 10px 15px;
+    font-size: 15px;
+  }
+  
+  .navbar-brand span {
+    font-size: 20px;
+  }
+}
+
+/* Para móviles y dispositivos pequeños */
+@media (max-width: 767px) {
+  .header_section {
+    padding: 8px 0;
+  }
+  
+  .navbar-brand span {
+    font-size: 18px;
+  }
+  
+  .custom_nav-container .navbar-toggler {
+    padding: 4px 8px;
+  }
+  
+  .custom_nav-container .navbar-toggler .navbar-toggler-icon {
+    background-size: 30px;
+  }
+  
+  .custom_nav-container .navbar-nav {
+    background-color: #000000;
+    padding: 10px 0;
+    border-radius: 0 0 5px 5px;
+    margin-top: 10px;
+  }
+  
+  .custom_nav-container .navbar-nav .nav-item {
+    margin: 5px 0;
+  }
+  
+  .custom_nav-container .navbar-nav .nav-item .nav-link {
+    padding: 10px 20px;
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .custom_nav-container .navbar-nav .nav-item .nav-link::before {
+    left: 20px;
+    bottom: 5px;
+    transform: none;
+  }
+  
+  .d-flex.mx-auto.flex-column.flex-lg-row.align-items-center {
+    width: 100%;
+  }
+}
+
+/* Para dispositivos muy pequeños */
+@media (max-width: 480px) {
+  .navbar-brand span {
+    font-size: 16px;
+  }
+  
+  .custom_nav-container .navbar-toggler .navbar-toggler-icon {
+    background-size: 25px;
+  }
+}
+
+/*-- Responsivo para el formulario--*/
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 15px; 
+  }
+
+  .form-group {
+    width: 100%; 
+    margin-bottom: 15px;
+  }
+  
+  label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+  
+  .form-control {
+    font-size: 16px; /* Mejor tamaño para tocar en dispositivos móviles */
+  }
+  
+  .form-check-input {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .form-check-label {
+    font-size: 16px;
+  }
+}
+
+/* Mejorar la experiencia en tablets específicamente */
+@media (min-width: 768px) and (max-width: 991px) {
+  .form-group {
+    padding: 0 12px;
+  }
+  
+  .form-control {
+    padding: 12px;
+  }
+  
+  .btnCl {
+    width: 280px;
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,28 @@
+/* Base */
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Scroll interno */
+.facturas-table-wrapper .table-container {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+/* Tablas full-width y columnas auto-ajustables */
+.facturas-table-wrapper .table-container table {
+    width: 100%;
+    table-layout: auto;
+}
+
+/* Celdas de datos en una sola línea */
+.facturas-table-wrapper .table-container tbody td {
+    white-space: nowrap;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Ajustes opcionales de estética */
+.facturas-table-wrapper h5 {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
