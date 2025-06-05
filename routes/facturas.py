@@ -3,6 +3,7 @@ from services.facturas_service import get_facturas_completas
 from services.dataico_uploader import subir_facturas_a_dataico
 from services.dataico_downloader import fetch_and_transform
 from services.contapyme_exporter import export_contapyme_to_xlsx
+from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 import pandas as pd
 import io
 import json
@@ -97,10 +98,13 @@ def subir_facturas():
         return jsonify({"success": False, "message": f"Error: {str(e)}"}), 500
 
 
+def _safe_str(x: str) -> str:
+    return ILLEGAL_CHARACTERS_RE.sub("", x) if isinstance(x, str) else x
+
 @facturas_completo_bp.route("/facturas/export")
 def exportar_facturas():
     productos = get_facturas_completas()
-    df = pd.DataFrame(productos)
+    df = pd.DataFrame(productos).applymap(_safe_str)
 
     output = io.BytesIO()
     with pd.ExcelWriter(output, engine="openpyxl") as writer:
