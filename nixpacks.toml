@@ -1,14 +1,10 @@
-providers = ["python"]
-
+providers = ["python"]    
 [phases.setup]
+
 nixPkgs = [
   "python311",
   "gcc", "gnumake", "pkg-config",
-  "unixODBC"   
-]
-
-nixLibs = [
-  "unixODBC"       
+  "unixODBC"
 ]
 
 [phases.install]
