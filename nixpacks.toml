@@ -1,12 +1,22 @@
+providers = ["python"]
+
 [phases.setup]
-nixPkgs = ["python311", "gcc", "unixODBC"]
- 
+nixPkgs = [
+  "python311",
+  "gcc", "gnumake", "pkg-config",
+  "unixODBC"            # ← headers (dev) para compilar pyodbc
+]
+
+nixLibs = [
+  "unixODBC"       
+]
+
 [phases.install]
 cmds = [
-  "python3.11 -m venv /opt/venv",
-  ". /opt/venv/bin/activate",
-  "pip install -r requirements.txt"
+  "python -m venv /opt/venv",
+  "/opt/venv/bin/pip install --upgrade pip setuptools wheel",
+  "/opt/venv/bin/pip install -r requirements.txt"
 ]
- 
+
 [start]
-cmd = "python3.11 app.py"
+cmd = "/opt/venv/bin/gunicorn app:app -b 0.0.0.0:${PORT} --timeout 120"
