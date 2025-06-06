@@ -6,11 +6,11 @@ nixPkgs = ["python311", "gcc", "unixODBC"]
 
 cmds = [
 
-  "python3.11 -m venv /opt/venv",
+  "python3.11 -m venv venv",
 
-  ". /opt/venv/bin/activate",
+  "venv\Scripts\activate",
 
-  "/opt/venv/bin/pip install -r requirements.txt"
+  "\venv\Scripts\activate\pip install -r requirements.txt"
 
 ]
  
