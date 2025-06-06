@@ -1,7 +1,9 @@
 providers = ["python"]
 
 [phases.setup]
-nixPkgs = ["python311", "gcc", "gnumake", "pkg-config", "unixODBC"]
+nixPkgs = [
+  "python311", "gcc", "gnumake", "pkg-config", "unixODBC"
+]
 
 [phases.install]
 cmds = [
