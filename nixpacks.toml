@@ -1,0 +1,20 @@
+[phases.setup]
+
+nixPkgs = ["python311", "gcc", "unixODBC"]
+ 
+[phases.install]
+
+cmds = [
+
+  "python3.11 -m venv /opt/venv",
+
+  ". /opt/venv/bin/activate",
+
+  "pip install -r requirements.txt"
+
+]
+ 
+[start]
+
+cmd = "python3.11 app.py"
+ 
