@@ -1,20 +1,18 @@
+# nixpacks.toml
 [phases.setup]
+# python311 incluye pip; gnumake y pkg-config facilitan la compilación de C
+nixPkgs = ["python311", "gcc", "gnumake", "pkg-config", "unixODBC"]
 
-nixPkgs = ["python311", "gcc", "unixODBC"]
- 
 [phases.install]
-
 cmds = [
-
-  "python3.11 -m venv venv",
-
-  "venv/Scripts/activate",
-
-  "/venv/Scripts/activate/pip install -r requirements.txt"
-
+  # 1. crea el venv
+  "python -m venv /opt/venv",
+  # 2. actualiza herramientas básicas
+  "/opt/venv/bin/pip install --upgrade pip setuptools wheel",
+  # 3. instala dependencias del proyecto
+  "/opt/venv/bin/pip install -r requirements.txt"
 ]
- 
-[start]
 
-cmd = "python3.11 app.py"
- 
+[start]
+# usa gunicorn; Railway inyecta $PORT
+cmd = "/opt/venv/bin/gunicorn app:app -b 0.0.0.0:${PORT} --timeout 120"
