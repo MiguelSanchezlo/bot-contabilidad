@@ -10,7 +10,7 @@ cmds = [
 
   ". /opt/venv/bin/activate",
 
-  "pip install -r requirements.txt"
+  "/opt/venv/bin/pip install -r requirements.txt"
 
 ]
  
